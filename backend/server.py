@@ -1,4 +1,5 @@
 from fastapi import FastAPI, APIRouter
+from fastapi.responses import FileResponse
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -41,6 +42,16 @@ class StatusCheckCreate(BaseModel):
 @api_router.get("/")
 async def root():
     return {"message": "Hello World"}
+
+@api_router.get("/download/ecl-theme")
+async def download_ecl_theme():
+    """Serve the ECL Moodle theme ZIP for direct download."""
+    zip_path = "/app/theme/ecl_v1.0.0.zip"
+    return FileResponse(
+        path=zip_path,
+        media_type="application/zip",
+        filename="ecl_v1.0.0.zip",
+    )
 
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
