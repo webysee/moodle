@@ -1,58 +1,42 @@
 <?php
-// This file is part of Moodle - https://moodle.org/
-//
-// Theme ECL - Core renderer override.
-//
-// @package    theme_ecl
-// @copyright  2026 Ecole de Commerce de Lyon
-
-namespace theme_ecl\output;
-
+// This file is part of Moodle - http://moodle.org/
 defined('MOODLE_INTERNAL') || die();
 
-use moodle_url;
-
-class core_renderer extends \theme_boost\output\core_renderer {
+/**
+ * Surcharge du rendu — nettoyage footer (Moodle native mentions).
+ */
+class theme_ecl_core_renderer extends \theme_boost\output\core_renderer {
 
     /**
-     * Returns the URL of the site logo.
-     *
-     * @param int $maxwidth
-     * @param int $maxheight
-     * @return moodle_url|false
+     * Supprime les liens et mentions Moodle indésirables du footer.
      */
-    public function get_logo_url($maxwidth = null, $maxheight = 200) {
-        $theme = \theme_config::load('ecl');
-        $logourl = $theme->setting_file_url('logo', 'logo');
-        if (!empty($logourl)) {
-            return new moodle_url($logourl);
-        }
-        // Fallback to bundled default logo.
-        return new moodle_url('/theme/ecl/pix/logo.png');
+    public function standard_footer_html() {
+        $output = parent::standard_footer_html();
+
+        $output = preg_replace('/<div[^>]*class="[^"]*powered-by[^"]*"[^>]*>.*?<\/div>/si', '', $output);
+        $output = preg_replace('/Fourni par.*?<\/a>/si', '', $output);
+        $output = preg_replace('/Powered by.*?<\/a>/si', '', $output);
+
+        $output = preg_replace('/<a[^>]*href="[^"]*moodle\.com[^"]*"[^>]*>.*?<\/a>/si', '', $output);
+        $output = preg_replace('/<a[^>]*href="[^"]*moodle\.org[^"]*"[^>]*>.*?<\/a>/si', '', $output);
+        $output = preg_replace('/<a[^>]*href="[^"]*download\.moodle[^"]*"[^>]*>.*?<\/a>/si', '', $output);
+        $output = preg_replace('/<a[^>]*href="[^"]*moodlemobile[^"]*"[^>]*>.*?<\/a>/si', '', $output);
+        $output = preg_replace('/<a[^>]*href="[^"]*settheme[^"]*"[^>]*>.*?<\/a>/si', '', $output);
+        $output = preg_replace('/<a[^>]*href="[^"]*theme_switch[^"]*"[^>]*>.*?<\/a>/si', '', $output);
+
+        $output = preg_replace('/<li[^>]*>\s*<\/li>/si', '', $output);
+        $output = preg_replace('/<ul[^>]*>\s*<\/ul>/si', '', $output);
+
+        return $output;
     }
 
-    /**
-     * Returns the URL of the compact logo (navbar).
-     *
-     * @param int $maxwidth
-     * @param int $maxheight
-     * @return moodle_url|false
-     */
-    public function get_compact_logo_url($maxwidth = 120, $maxheight = 40) {
-        return $this->get_logo_url($maxwidth, $maxheight);
-    }
+    public function footer() {
+        $output = parent::footer();
 
-    /**
-     * Site favicon.
-     *
-     * @return moodle_url
-     */
-    public function favicon() {
-        $theme = \theme_config::load('ecl');
-        $favicon = $theme->setting_file_url('favicon', 'favicon');
-        if (!empty($favicon)) {
-            return new moodle_url($favicon);
-        }
-        return parent::favicon();
+        $output = preg_replace('/Administr[ée] par.*?(<\/[a-z]+>)/si', '$1', $output);
+        $output = preg_replace('/Fourni par.*?(<\/[a-z]+>)/si', '$1', $output);
+        $output = preg_replace('/Powered by.*?(<\/[a-z]+>)/si', '$1', $output);
+
+        return $output;
     }
 }

@@ -1,0 +1,2 @@
+/* theme_ecl — fallback minimal CSS (rarely used by Moodle once compiled SCSS works) */
+.navbar { background: linear-gradient(135deg, #002362 0%, #003a99 100%) !important; }

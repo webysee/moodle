@@ -1,0 +1,237 @@
+/* ============================================================
+   theme_ecl — navbar.css
+   Chargé EN DERNIER (config.php $THEME->sheets), écrase tout
+   ce que Boost compile avant.
+   ============================================================ */
+
+/* Fond navbar */
+.navbar,
+nav.navbar {
+    background: linear-gradient(135deg, #002362 0%, #003a99 100%) !important;
+    border-bottom: 3px solid #cc0000 !important;
+}
+
+/* ── TOUS les liens et textes du menu en BLANC GRAS ── */
+.navbar .nav-link,
+.navbar .nav-link:link,
+.navbar .nav-link:visited,
+.navbar .nav-link:active,
+.navbar-nav .nav-link,
+.navbar-nav .nav-link:link,
+.navbar-nav > .nav-item > .nav-link,
+.primary-navigation .nav-link,
+.primary-navigation .nav-link:link,
+.primary-navigation .nav-link:visited,
+[data-region="primary-navigation"] .nav-link,
+[data-region="primary-navigation"] a,
+.moremenu .nav-link,
+.moremenu-navigation .nav-link,
+#usernavigation .nav-link,
+#usernavigation .nav-link:link,
+#usernavigation a,
+#usernavigation a:link,
+.langmenu .nav-link,
+.langmenu a,
+.navbar-brand,
+.navbar-brand:link,
+.navbar-brand:visited,
+header#page-header .nav-link,
+header .navbar .nav-link {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+    transition: all 0.2s ease !important;
+    border-radius: 6px !important;
+}
+
+/* ── Hover — bien visible ── */
+.navbar .nav-link:hover,
+.navbar-nav .nav-link:hover,
+.primary-navigation .nav-link:hover,
+[data-region="primary-navigation"] .nav-link:hover,
+.moremenu .nav-link:hover,
+#usernavigation .nav-link:hover,
+#usernavigation a:hover,
+.langmenu a:hover {
+    color: #ffffff !important;
+    background-color: #cc0000 !important;
+    border-radius: 6px !important;
+    opacity: 1 !important;
+    text-decoration: none !important;
+    transform: translateY(-2px) !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 4px 12px rgba(204,0,0,0.45) !important;
+}
+
+/* ── Icônes ── */
+.navbar .icon,
+.navbar i.fa,
+.navbar i,
+#usernavigation .icon,
+#usernavigation i,
+.primary-navigation .icon {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+}
+
+/* ── Dropdown ── */
+.navbar .dropdown-menu {
+    background-color: #001a4d !important;
+    border: none !important;
+    border-top: 3px solid #cc0000 !important;
+    border-radius: 0 0 10px 10px !important;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.35) !important;
+}
+.navbar .dropdown-menu .dropdown-item,
+.navbar .dropdown-menu a {
+    color: #ffffff !important;
+    font-weight: 500 !important;
+}
+.navbar .dropdown-menu .dropdown-item:hover,
+.navbar .dropdown-menu a:hover {
+    background-color: rgba(255,255,255,0.12) !important;
+    color: #ffcccc !important;
+}
+
+/* ============================================================
+   MENUS ADMINISTRATION — fond clair donc texte bleu foncé
+   ============================================================ */
+.secondary-navigation .nav-link,
+.secondary-navigation a,
+[data-region="secondary-navigation"] .nav-link,
+[data-region="secondary-navigation"] a,
+.nav-tabs .nav-link,
+.nav-tabs a,
+#adminmenuwrapper a,
+#adminmenuwrapper .nav-link,
+[data-region="settings-navigation"] a,
+[data-region="settings-navigation"] .nav-link {
+    color: #002362 !important;
+    font-weight: 600 !important;
+    text-shadow: none !important;
+    background-color: transparent !important;
+    transform: none !important;
+    box-shadow: none !important;
+    transition: all 0.2s ease !important;
+}
+
+.secondary-navigation .nav-link:hover,
+.secondary-navigation a:hover,
+[data-region="secondary-navigation"] .nav-link:hover,
+[data-region="secondary-navigation"] a:hover,
+.nav-tabs .nav-link:hover,
+.nav-tabs a:hover {
+    color: #cc0000 !important;
+    background-color: rgba(0,35,98,0.07) !important;
+    border-radius: 6px !important;
+    transform: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+.secondary-navigation .nav-link.active,
+[data-region="secondary-navigation"] .nav-link.active,
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+    color: #cc0000 !important;
+    border-bottom: 3px solid #cc0000 !important;
+    font-weight: 700 !important;
+    background: transparent !important;
+    text-shadow: none !important;
+}
+
+/* ============================================================
+   BURGER MOBILE
+   ============================================================ */
+.navbar-toggler {
+    border: 2px solid #ffffff !important;
+    border-radius: 8px !important;
+    padding: 0.5rem 0.75rem !important;
+    background: rgba(255,255,255,0.15) !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    transition: background 0.2s ease !important;
+}
+
+.navbar-toggler:hover,
+.navbar-toggler:focus {
+    background: #cc0000 !important;
+    border-color: #cc0000 !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(204,0,0,0.4) !important;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-miterlimit='10' stroke-width='3' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+    width: 1.6em !important;
+    height: 1.6em !important;
+}
+
+/* ============================================================
+   LOGO — bien visible sur fond bleu
+   ============================================================ */
+.navbar-brand img,
+.logo img,
+nav.navbar .navbar-brand img {
+    background: #ffffff !important;
+    border-radius: 8px !important;
+    padding: 4px 8px !important;
+    max-height: 50px !important;
+    width: auto !important;
+    object-fit: contain !important;
+}
+
+/* ============================================================
+   MASQUER BOUTON MODE ÉDITION SUR MOBILE
+   ============================================================ */
+@media (max-width: 991.98px) {
+    .editmode-switch-form,
+    [data-action="toggle-editmode"],
+    .editmode-switch-form button,
+    #page-navbar .editmode-switch-form,
+    .btn-editmode,
+    form.editmode-switch-form {
+        display: none !important;
+    }
+}
+
+/* ============================================================
+   MASQUER ÉLÉMENTS MOODLE NATIFS INDÉSIRABLES
+   ============================================================ */
+.powered-by-moodle,
+[data-region="footer"] .powered-by,
+.footer-content .powered-by,
+a[href*="moodle.com"],
+a[href*="moodle.org"] {
+    display: none !important;
+}
+
+a[href*="download.moodle.org"],
+a[href*="moodlemobile"],
+.mobile-app-link,
+[data-action="download-app"],
+.app-download,
+li:has(a[href*="download.moodle.org"]),
+li:has(a[href*="moodlemobile"]) {
+    display: none !important;
+}
+
+a[href*="theme=boost"],
+a[href*="settheme"],
+a[href*="theme_switch"],
+.theme-switch-link,
+li:has(a[href*="settheme"]) {
+    display: none !important;
+}
+
+a[href*="dataprivacy/summary"] {
+    display: none !important;
+}
+
+#page-footer .footer-content-debugging,
+#page-footer .footer-powered,
+#page-footer .powered-by,
+#page-footer [class*="powered"] {
+    display: none !important;
+}
