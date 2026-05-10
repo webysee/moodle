@@ -32,7 +32,7 @@ if ($ADMIN->fulltree) {
         $choices[$file->get_filename()] = $file->get_filename();
     }
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
-    $setting->set_updatedflag('theme_ecl');
+    $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     // Logo.
@@ -41,7 +41,7 @@ if ($ADMIN->fulltree) {
     $description = get_string('logo_desc', 'theme_ecl');
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'logo', 0,
         ['maxfiles' => 1, 'accepted_types' => ['.png', '.jpg', '.svg']]);
-    $setting->set_updatedflag('theme_ecl');
+    $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     // Favicon.
@@ -50,7 +50,7 @@ if ($ADMIN->fulltree) {
     $description = get_string('favicon_desc', 'theme_ecl');
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'favicon', 0,
         ['maxfiles' => 1, 'accepted_types' => ['.ico', '.png']]);
-    $setting->set_updatedflag('theme_ecl');
+    $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     // Primary color.
@@ -58,7 +58,7 @@ if ($ADMIN->fulltree) {
     $title = get_string('primarycolor', 'theme_ecl');
     $description = get_string('primarycolor_desc', 'theme_ecl');
     $setting = new admin_setting_configcolourpicker($name, $title, $description, '#002362');
-    $setting->set_updatedflag('theme_ecl');
+    $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     // Secondary color.
@@ -66,7 +66,7 @@ if ($ADMIN->fulltree) {
     $title = get_string('secondarycolor', 'theme_ecl');
     $description = get_string('secondarycolor_desc', 'theme_ecl');
     $setting = new admin_setting_configcolourpicker($name, $title, $description, '#E30613');
-    $setting->set_updatedflag('theme_ecl');
+    $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     // Accent 1 (orange CI).
@@ -74,7 +74,7 @@ if ($ADMIN->fulltree) {
     $title = get_string('accent1color', 'theme_ecl');
     $description = get_string('accent1color_desc', 'theme_ecl');
     $setting = new admin_setting_configcolourpicker($name, $title, $description, '#F77F00');
-    $setting->set_updatedflag('theme_ecl');
+    $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     // Accent 2 (vert CI).
@@ -82,7 +82,7 @@ if ($ADMIN->fulltree) {
     $title = get_string('accent2color', 'theme_ecl');
     $description = get_string('accent2color_desc', 'theme_ecl');
     $setting = new admin_setting_configcolourpicker($name, $title, $description, '#009E60');
-    $setting->set_updatedflag('theme_ecl');
+    $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     // Custom SCSS pre.
@@ -90,7 +90,7 @@ if ($ADMIN->fulltree) {
     $title = get_string('scsspre', 'theme_ecl');
     $description = get_string('scsspre_desc', 'theme_ecl');
     $setting = new admin_setting_scsscode($name, $title, $description, '', PARAM_RAW);
-    $setting->set_updatedflag('theme_ecl');
+    $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     // Custom SCSS post.
@@ -98,7 +98,7 @@ if ($ADMIN->fulltree) {
     $title = get_string('scsscustom', 'theme_ecl');
     $description = get_string('scsscustom_desc', 'theme_ecl');
     $setting = new admin_setting_scsscode($name, $title, $description, '', PARAM_RAW);
-    $setting->set_updatedflag('theme_ecl');
+    $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     $settings->add($page);
