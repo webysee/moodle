@@ -1,0 +1,57 @@
+// ============================================================
+// SIDE BLOCKS
+// ============================================================
+
+.block {
+    background: #fff;
+    border: 1px solid $ecl-line;
+    border-radius: $border-radius-lg;
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+
+    .card-title,
+    h3.card-title,
+    .card-block-header {
+        background: linear-gradient(90deg, rgba($ecl-primary, 0.04), transparent);
+        padding: 1rem 1.25rem;
+        font-family: $ecl-font-display;
+        font-weight: 600;
+        color: $ecl-primary;
+        font-size: 1rem;
+        margin: 0;
+        border-bottom: 1px solid $ecl-line;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: $ecl-secondary;
+        }
+    }
+
+    .card-body { padding: 1rem 1.25rem; }
+}
+
+// Activity / progress block
+.block_recentlyaccesseditems,
+.block_myoverview {
+    .dashboard-card-deck {
+        gap: 1rem;
+    }
+}
+
+// Calendar block
+.block_calendar_month .calendar-controls {
+    background: rgba($ecl-primary, 0.03);
+    border-radius: $border-radius-sm;
+    padding: 0.5rem;
+}
+
+// Online users
+.block_online_users .listentry {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid $ecl-line;
+    &:last-child { border-bottom: none; }
+}

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>ECL Abidjan — Aperçu du thème Moodle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root {
+  --primary: #002362;
+  --primary-700: #001b4d;
+  --secondary: #E30613;
+  --orange: #F77F00;
+  --green: #009E60;
+  --ink: #0B1530;
+  --muted: #5B6678;
+  --line: rgba(0,35,98,0.08);
+  --surface: #F6F8FC;
+  --gradient: linear-gradient(135deg, #002362 0%, #001b4d 65%, #ff1f2d 130%);
+  --flag: linear-gradient(90deg, #F77F00 0 33.3%, #fff 33.3% 66.6%, #009E60 66.6% 100%);
+  --sans: 'Outfit', -apple-system, sans-serif;
+  --display: 'Fraunces', Georgia, serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { font-family: var(--sans); color: var(--ink); background: var(--surface); -webkit-font-smoothing: antialiased; line-height: 1.5; }
+h1,h2,h3,h4,h5 { font-family: var(--display); letter-spacing: -0.015em; color: var(--ink); margin: 0 0 .5rem; }
+a { color: var(--primary); text-decoration: none; transition: color .2s; }
+a:hover { color: var(--secondary); }
+img { max-width: 100%; height: auto; display: block; }
+.container { max-width: 1240px; margin: 0 auto; padding: 0 1.5rem; }
+::selection { background: var(--primary); color: #fff; }
+
+/* NAVBAR */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: #fff; border-bottom: 1px solid var(--line);
+  backdrop-filter: saturate(180%) blur(12px);
+  box-shadow: 0 1px 0 rgba(0,35,98,.04), 0 8px 24px rgba(0,35,98,.04);
+}
+.navbar::after { content:''; position: absolute; left:0; right:0; bottom:0; height:3px; background: var(--flag); opacity:.85; }
+.navbar-inner { display: flex; align-items: center; justify-content: space-between; min-height: 76px; padding: 0.5rem 0; }
+.brand { display: flex; align-items: center; gap: .85rem; }
+.brand img { height: 50px; width: auto; filter: drop-shadow(0 2px 6px rgba(0,35,98,.15)); }
+.brand .name { font-family: var(--display); font-weight: 700; color: var(--primary); font-size: 1.1rem; line-height: 1.1; }
+.brand .name small { display: block; font-family: var(--sans); font-weight: 500; font-size: 0.7rem; color: var(--muted); letter-spacing: .18em; text-transform: uppercase; margin-top: .15rem; }
+.nav-links { display: flex; gap: .25rem; align-items: center; }
+.nav-links a { padding: .6rem 1rem; font-weight: 500; color: var(--ink); font-size: .95rem; position: relative; }
+.nav-links a::before { content:''; position:absolute; left:1rem; right:1rem; bottom:.4rem; height:2px; background:var(--secondary); transform:scaleX(0); transform-origin:left; transition: transform .25s; }
+.nav-links a:hover::before, .nav-links a.active::before { transform:scaleX(1); }
+.nav-cta { display: flex; align-items: center; gap: .75rem; }
+
+/* BUTTONS */
+.btn { display: inline-flex; align-items: center; gap: .5rem; padding: .65rem 1.4rem; border-radius: 999px; font-weight: 600; font-size: .95rem; border: 1px solid transparent; cursor: pointer; transition: transform .15s, box-shadow .2s, background .2s, color .2s; }
+.btn-primary { background: var(--primary); color: #fff; box-shadow: 0 6px 16px rgba(0,35,98,.25); }
+.btn-primary:hover { background: var(--primary-700); color:#fff; box-shadow: 0 10px 22px rgba(0,35,98,.35); transform: translateY(-1px); }
+.btn-secondary { background: var(--secondary); color: #fff; box-shadow: 0 6px 16px rgba(227,6,19,.25); }
+.btn-secondary:hover { background: #b80510; color:#fff; transform: translateY(-1px); }
+.btn-ghost { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.3); color: #fff; backdrop-filter: blur(10px); }
+.btn-ghost:hover { background: rgba(255,255,255,.18); color: #fff; }
+.btn-lg { padding: .85rem 1.7rem; font-size: 1rem; }
+
+/* HERO */
+main { padding-top: 76px; }
+.hero { position: relative; overflow: hidden; background: var(--gradient); color: #fff; padding: 6rem 0 5rem; border-radius: 0 0 28px 28px; margin-bottom: 4rem; isolation: isolate; }
+.hero::before { content:''; position: absolute; inset: 0; z-index:-1;
+  background: radial-gradient(circle at 20% 30%, rgba(255,255,255,.08), transparent 50%), radial-gradient(circle at 80% 70%, rgba(227,6,19,.20), transparent 55%); }
+.hero::after { content:''; position: absolute; top: -80px; right: -80px; width: 380px; height: 380px; background: rgba(255,255,255,.04); border-radius: 60% 40% 50% 50%/50% 50% 40% 60%; z-index:-1; animation: blob 14s ease-in-out infinite; }
+@keyframes blob { 0%,100% { transform: rotate(0) scale(1); } 50% { transform: rotate(20deg) scale(1.08); } }
+.eyebrow { display: inline-flex; align-items: center; gap: .5rem; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); padding: .4rem 1rem; border-radius: 999px; font-size: .78rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; backdrop-filter: blur(12px); margin-bottom: 1.5rem; }
+.eyebrow i { color: var(--orange); }
+.hero h1 { font-weight: 700; font-size: clamp(2.25rem, 5vw, 4rem); line-height: 1.05; letter-spacing: -.025em; color: #fff; max-width: 18ch; margin-bottom: 1.25rem; }
+.hero h1 .accent { background: linear-gradient(120deg, var(--orange) 0%, #ff394a 60%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-sub { font-size: 1.15rem; line-height: 1.55; color: rgba(255,255,255,.88); max-width: 52ch; margin-bottom: 2rem; }
+.hero-cta { display: flex; gap: .75rem; flex-wrap: wrap; }
+.stats { display: flex; gap: 2.5rem; margin-top: 3rem; flex-wrap: wrap; }
+.stat .num { font-family: var(--display); font-size: 2.25rem; font-weight: 700; color: #fff; line-height: 1; }
+.stat .label { font-size: .82rem; color: rgba(255,255,255,.7); letter-spacing: .08em; text-transform: uppercase; margin-top: .35rem; }
+
+/* SLIDER */
+.section-title { font-weight: 600; font-size: 2rem; letter-spacing: -.015em; margin: 0 0 .25rem; display:flex; align-items:center; gap:1rem; }
+.section-title .bar { display: inline-block; width: 48px; height: 4px; background: var(--secondary); border-radius: 4px; }
+.section-lead { color: var(--muted); font-size: 1.05rem; margin: 0 0 2.5rem; max-width: 60ch; }
+
+.slider { position: relative; border-radius: 16px; overflow: hidden; box-shadow: 0 18px 48px rgba(0,35,98,.12); margin-bottom: 4rem; height: 460px; }
+.slider .slide { position: absolute; inset: 0; opacity: 0; transition: opacity .8s; }
+.slider .slide.active { opacity: 1; }
+.slide-image { position: absolute; inset: 0; background-size: cover; background-position: center; background-color: var(--primary); }
+.slide-image::after { content:''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,35,98,.85) 0%, rgba(0,35,98,.55) 55%, rgba(0,35,98,.25) 100%); }
+.slide-content { position: relative; z-index: 2; color: #fff; height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 3rem 4rem; max-width: 60%; }
+.slide-eyebrow { display: inline-block; width: fit-content; background: var(--secondary); padding: .35rem .9rem; font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; border-radius: 4px; margin-bottom: 1.25rem; }
+.slide-content h2 { font-weight: 700; font-size: clamp(1.75rem, 3.5vw, 2.5rem); line-height: 1.1; color: #fff; margin-bottom: 1rem; }
+.slide-content p { font-size: 1.05rem; color: rgba(255,255,255,.92); line-height: 1.55; margin: 0 0 1.5rem; max-width: 56ch; }
+.slide-cta { display: inline-flex; align-items: center; gap: .6rem; background: #fff; color: var(--primary); padding: .7rem 1.5rem; border-radius: 999px; font-weight: 600; transition: gap .2s, transform .2s, box-shadow .2s, color .2s; width: fit-content; }
+.slide-cta:hover { gap: .9rem; transform: translateY(-2px); color: var(--secondary); box-shadow: 0 12px 28px rgba(0,0,0,.25); }
+
+.slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.35); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1rem; cursor: pointer; transition: background .2s, transform .2s; }
+.slider-arrow:hover { background: var(--secondary); border-color: var(--secondary); transform: translateY(-50%) scale(1.08); }
+.slider-arrow.prev { left: 1.25rem; }
+.slider-arrow.next { right: 1.25rem; }
+.slider-dots { position: absolute; bottom: 1.25rem; left: 50%; transform: translateX(-50%); z-index: 5; display: flex; gap: 8px; }
+.slider-dots button { width: 28px; height: 4px; border-radius: 2px; background: rgba(255,255,255,.4); border: none; cursor: pointer; transition: background .2s, width .3s; padding: 0; }
+.slider-dots button.active { background: var(--secondary); width: 44px; }
+
+/* HIGHLIGHTS */
+.highlights { margin-bottom: 4rem; }
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+.h-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 2rem; height: 100%; position: relative; overflow: hidden; transition: transform .3s, box-shadow .3s, border-color .3s; }
+.h-card::before { content:''; position: absolute; top:0; left:0; width: 60px; height: 4px; background: var(--secondary); transition: width .4s; }
+.h-card:hover { transform: translateY(-4px); box-shadow: 0 18px 48px rgba(0,35,98,.12); border-color: rgba(0,35,98,.18); }
+.h-card:hover::before { width: 100%; }
+.h-card .icon { width: 56px; height: 56px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; background: rgba(0,35,98,.08); color: var(--primary); font-size: 1.5rem; margin-bottom: 1.25rem; }
+.h-card:nth-child(2) .icon { background: rgba(227,6,19,.08); color: var(--secondary); }
+.h-card:nth-child(3) .icon { background: rgba(247,127,0,.10); color: var(--orange); }
+.h-card:nth-child(4) .icon { background: rgba(0,158,96,.10); color: var(--green); }
+.h-card h3 { font-size: 1.2rem; font-weight: 600; margin: 0 0 .75rem; }
+.h-card p { color: var(--muted); font-size: .95rem; line-height: 1.6; margin: 0 0 1rem; }
+.h-card .link { color: var(--primary); font-weight: 600; font-size: .9rem; display: inline-flex; align-items: center; gap: .4rem; transition: gap .2s, color .2s; }
+.h-card .link:hover { color: var(--secondary); gap: .7rem; }
+
+/* COURSES SECTION */
+.courses-section { background: #fff; padding: 4rem 0; border-radius: 28px; margin: 0 1.5rem 4rem; box-shadow: 0 1px 2px rgba(0,35,98,.04); }
+.courses-section .container { padding: 0 2.5rem; }
+.course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.course-card { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #fff; transition: transform .25s, box-shadow .25s; }
+.course-card:hover { transform: translateY(-3px); box-shadow: 0 18px 48px rgba(0,35,98,.12); }
+.course-img { height: 160px; background: var(--gradient); position: relative; }
+.course-img::after { content:''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,.4)); }
+.course-img .cat { position: absolute; top: 1rem; left: 1rem; z-index: 2; background: rgba(255,255,255,.95); color: var(--primary); padding: .25rem .7rem; border-radius: 999px; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.course-body { padding: 1.25rem 1.5rem 1.5rem; }
+.course-body h4 { font-size: 1.05rem; font-weight: 600; margin: 0 0 .35rem; color: var(--primary); }
+.course-body .meta { color: var(--muted); font-size: .85rem; }
+.course-body .progress { height: 6px; background: var(--surface); border-radius: 3px; margin-top: 1rem; overflow: hidden; }
+.course-body .progress > span { display:block; height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
+
+/* FOOTER */
+footer { background: var(--primary); color: rgba(255,255,255,.85); margin-top: 5rem; position: relative; }
+footer::before { content:''; position: absolute; top:0; left:0; right:0; height: 4px; background: var(--flag); }
+.footer-main { padding: 4rem 0 2.5rem; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1.2fr; gap: 2.5rem; }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+.footer-brand-block .footer-brand { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+.footer-brand img { height: 56px; }
+.footer-brand .name { font-family: var(--display); color: #fff; font-size: 1.05rem; font-weight: 600; }
+.footer-brand .name small { display: block; color: rgba(255,255,255,.6); font-family: var(--sans); font-size: .7rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; margin-top: .25rem; }
+.footer-tagline { color: rgba(255,255,255,.72); font-size: .92rem; line-height: 1.6; max-width: 32ch; }
+.footer-col h5 { color: #fff; font-weight: 600; font-size: 1rem; margin: 0 0 1.25rem; padding-bottom: .5rem; position: relative; }
+.footer-col h5::after { content:''; position: absolute; left: 0; bottom: 0; width: 28px; height: 2px; background: var(--secondary); }
+.footer-col ul { list-style: none; padding: 0; margin: 0; }
+.footer-col li { margin-bottom: .6rem; }
+.footer-col a { color: rgba(255,255,255,.75); font-size: .92rem; transition: color .2s, padding .2s; display: inline-block; }
+.footer-col a:hover { color: #fff; padding-left: 6px; }
+.footer-col p { color: rgba(255,255,255,.75); font-size: .92rem; margin: 0 0 .5rem; }
+.footer-col i { color: var(--orange); margin-right: .5rem; }
+.footer-col .social a { font-size: 1.4rem; margin-right: .85rem; padding: 0; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,.12); padding: 1.25rem 0; font-size: .85rem; color: rgba(255,255,255,.6); }
+.footer-bottom-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+
+/* preview banner */
+.preview-banner { position: fixed; bottom: 1rem; right: 1rem; background: rgba(11,21,48,.92); color: #fff; padding: .75rem 1.1rem; border-radius: 12px; font-size: .82rem; box-shadow: 0 8px 24px rgba(0,0,0,.25); backdrop-filter: blur(10px); z-index: 9999; max-width: 320px; line-height: 1.4; }
+.preview-banner strong { color: var(--orange); }
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta .lang { display: none; }
+  .slide-content { padding: 2rem; max-width: 100%; }
+  .slider { height: 380px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a class="brand" href="#">
+      <img src="ecl/pix/logo.png" alt="ECL">
+      <span class="name">École de Commerce de Lyon<small>Campus Abidjan</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="#" class="active">Accueil</a>
+      <a href="#">Cours</a>
+      <a href="#">Programmes</a>
+      <a href="#">International</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <span class="lang" style="color:var(--muted); font-size:.85rem;"><i class="fa fa-globe"></i> FR</span>
+      <a href="#" class="btn btn-primary"><i class="fa fa-sign-in-alt"></i> Connexion</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow"><i class="fa fa-star"></i> École labellisée AACSB</span>
+      <h1>Façonnez l'élite du <span class="accent">commerce africain</span>.</h1>
+      <p class="hero-sub">Bienvenue sur la plateforme d'apprentissage de l'École de Commerce de Lyon — Campus Abidjan. Programmes Bachelor, Master & Executive en management, finance, marketing digital et entrepreneuriat.</p>
+      <div class="hero-cta">
+        <a href="#" class="btn btn-secondary btn-lg">Accéder à mes cours <i class="fa fa-arrow-right"></i></a>
+        <a href="#" class="btn btn-ghost btn-lg"><i class="fa fa-book-open"></i> Explorer les programmes</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="num">25+</div><div class="label">Programmes</div></div>
+        <div class="stat"><div class="num">3 000+</div><div class="label">Étudiants</div></div>
+        <div class="stat"><div class="num">94%</div><div class="label">Insertion pro</div></div>
+        <div class="stat"><div class="num">42</div><div class="label">Pays partenaires</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDER -->
+  <section class="container">
+    <h2 class="section-title"><span class="bar"></span> Annonces & actualités</h2>
+    <p class="section-lead" style="margin-bottom:2rem">Restez informé des dernières nouvelles du campus, événements et opportunités.</p>
+    <div class="slider" id="slider">
+      <div class="slide active">
+        <div class="slide-image" style="background-image: linear-gradient(135deg, #002362, #001b4d);"></div>
+        <div class="slide-content">
+          <span class="slide-eyebrow">Admissions</span>
+          <h2>Concours d'entrée 2026 ouvert</h2>
+          <p>Les inscriptions au concours Bachelor & Master sont désormais ouvertes. Sessions à Abidjan, Dakar, Yaoundé et en ligne. Date limite : 15 mars 2026.</p>
+          <a href="#" class="slide-cta">Candidater maintenant <i class="fa fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="slide-image" style="background-image: linear-gradient(135deg, #001b4d, #4a0008);"></div>
+        <div class="slide-content">
+          <span class="slide-eyebrow">Évènement</span>
+          <h2>Forum des Entreprises 2026</h2>
+          <p>Rencontrez plus de 80 recruteurs (BNP, KPMG, Orange, MTN, Total, Bolloré...) le 22 février au Campus Abidjan. Tenue professionnelle exigée.</p>
+          <a href="#" class="slide-cta">S'inscrire au forum <i class="fa fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="slide-image" style="background-image: linear-gradient(135deg, #002362, #6b3500);"></div>
+        <div class="slide-content">
+          <span class="slide-eyebrow">International</span>
+          <h2>Semestre à Lyon : 30 places ouvertes</h2>
+          <p>Étudiants de M1, candidatez avant le 30 janvier pour rejoindre le campus de Lyon au semestre de printemps. Bourses de mobilité disponibles.</p>
+          <a href="#" class="slide-cta">Voir les conditions <i class="fa fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <button class="slider-arrow prev" onclick="slide(-1)"><i class="fa fa-chevron-left"></i></button>
+      <button class="slider-arrow next" onclick="slide(1)"><i class="fa fa-chevron-right"></i></button>
+      <div class="slider-dots">
+        <button class="active" onclick="goto(0)"></button>
+        <button onclick="goto(1)"></button>
+        <button onclick="goto(2)"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS -->
+  <section class="container highlights">
+    <h2 class="section-title"><span class="bar"></span> Pourquoi choisir ECL Abidjan</h2>
+    <p class="section-lead">Une école française historique au service de la jeunesse africaine, avec une pédagogie moderne, un encadrement de qualité et un fort taux d'insertion professionnelle.</p>
+    <div class="cards-grid">
+      <div class="h-card">
+        <span class="icon"><i class="fa fa-graduation-cap"></i></span>
+        <h3>Excellence académique</h3>
+        <p>Un corps professoral expert, 100 ans d'héritage lyonnais et un programme reconnu à l'international.</p>
+        <a href="#" class="link">Découvrir <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="h-card">
+        <span class="icon"><i class="fa fa-globe"></i></span>
+        <h3>Ouverture internationale</h3>
+        <p>120 universités partenaires, doubles diplômes, semestres en France, au Canada, en Asie et en Afrique.</p>
+        <a href="#" class="link">Découvrir <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="h-card">
+        <span class="icon"><i class="fa fa-handshake"></i></span>
+        <h3>Réseau Alumni</h3>
+        <p>Plus de 18 000 diplômés actifs en Afrique de l'Ouest, partenariats privilégiés avec les leaders du marché.</p>
+        <a href="#" class="link">Découvrir <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="h-card">
+        <span class="icon"><i class="fa fa-trophy"></i></span>
+        <h3>Innovation pédagogique</h3>
+        <p>Apprentissage immersif, learning expedition, simulations d'entreprise et projets concrets dès la 1ère année.</p>
+        <a href="#" class="link">Découvrir <i class="fa fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSES (mock) -->
+  <section class="courses-section">
+    <div class="container">
+      <h2 class="section-title"><span class="bar"></span> Mes cours</h2>
+      <p class="section-lead">Reprenez là où vous vous étiez arrêté.</p>
+      <div class="course-grid">
+        <div class="course-card">
+          <div class="course-img"><span class="cat">Finance</span></div>
+          <div class="course-body">
+            <h4>Analyse financière des entreprises</h4>
+            <div class="meta">Mme Diallo · M1 Finance · 24 modules</div>
+            <div class="progress"><span style="width:68%"></span></div>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="course-img" style="background: linear-gradient(135deg, #002362, #b80510);"><span class="cat">Marketing</span></div>
+          <div class="course-body">
+            <h4>Marketing digital & growth hacking</h4>
+            <div class="meta">M. Koné · L3 Marketing · 18 modules</div>
+            <div class="progress"><span style="width:42%"></span></div>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="course-img" style="background: linear-gradient(135deg, #001b4d, #F77F00);"><span class="cat">Stratégie</span></div>
+          <div class="course-body">
+            <h4>Management interculturel en Afrique</h4>
+            <div class="meta">Pr. Touré · M2 MBA · 12 modules</div>
+            <div class="progress"><span style="width:91%"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-block">
+          <div class="footer-brand">
+            <img src="ecl/pix/logo.png" alt="ECL">
+            <div class="name">École de Commerce de Lyon<small>Campus Abidjan</small></div>
+          </div>
+          <p class="footer-tagline">L'école de commerce qui forme les leaders africains de demain, à Lyon comme à Abidjan.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <p><i class="fa fa-map-marker-alt"></i>Cocody, Abidjan, Côte d'Ivoire</p>
+          <p><i class="fa fa-phone"></i>+225 27 22 00 00 00</p>
+          <p><i class="fa fa-envelope"></i>contact@ecl-abidjan.ci</p>
+        </div>
+        <div class="footer-col">
+          <h5>Études</h5>
+          <ul>
+            <li><a href="#">Programmes</a></li>
+            <li><a href="#">Admissions</a></li>
+            <li><a href="#">International</a></li>
+            <li><a href="#">Bourses</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Vie étudiante</h5>
+          <ul>
+            <li><a href="#">Campus</a></li>
+            <li><a href="#">Associations</a></li>
+            <li><a href="#">Bibliothèque</a></li>
+            <li><a href="#">Sport</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Suivez-nous</h5>
+          <div class="social">
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+          <p style="margin-top:1rem;font-size:.85rem;">Rejoignez 12 000+ étudiants et alumni connectés.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="footer-bottom-inner">
+        <div>© 2026 École de Commerce de Lyon — Campus Abidjan. Tous droits réservés.</div>
+        <div style="font-size:.78rem;color:rgba(255,255,255,.45);">Plateforme propulsée par <a href="https://moodle.org" style="color:rgba(255,255,255,.75);">Moodle</a></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="preview-banner">
+  <strong>Aperçu HTML statique du thème Moodle ECL</strong><br>
+  Cette page reproduit fidèlement le rendu du thème <code>ecl</code> avant installation. Le ZIP est dans <code>/app/theme/ecl_v1.0.0.zip</code>.
+</div>
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll('#slider .slide');
+const dots = document.querySelectorAll('.slider-dots button');
+function show(i) {
+  slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+  dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+  current = i;
+}
+function slide(dir) { show((current + dir + slides.length) % slides.length); }
+function goto(i) { show(i); }
+setInterval(() => slide(1), 6000);
+</script>
+</body>
+</html>

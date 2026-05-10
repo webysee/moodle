@@ -1,0 +1,102 @@
+// ============================================================
+// CARDS / COURSES
+// ============================================================
+
+.card {
+    border: 1px solid $ecl-line;
+    border-radius: $border-radius-lg;
+    box-shadow: $box-shadow-sm;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    background: #fff;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: $box-shadow-lg;
+    }
+
+    .card-header {
+        background: transparent;
+        border-bottom: 1px solid $ecl-line;
+        font-family: $ecl-font-display;
+        font-weight: 600;
+    }
+}
+
+// Course cards - dashboard
+.dashboard-card,
+.course-card,
+.coursebox {
+    border: 1px solid $ecl-line;
+    border-radius: $border-radius-lg;
+    overflow: hidden;
+    background: #fff;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    .courseimage,
+    .course-summaryitem-image {
+        height: 160px;
+        background: $ecl-gradient;
+        position: relative;
+        overflow: hidden;
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.4));
+        }
+    }
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: $box-shadow-lg;
+    }
+}
+
+// Course summary
+.coursename a {
+    font-family: $ecl-font-display;
+    color: $ecl-primary;
+    font-weight: 600;
+    &:hover { color: $ecl-secondary; }
+}
+
+// Section / activity cards in course
+.course-content .section,
+.activity-item {
+    border-radius: $border-radius;
+    background: #fff;
+    border: 1px solid $ecl-line;
+    margin-bottom: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        border-color: rgba($ecl-primary, 0.3);
+        box-shadow: $box-shadow-sm;
+    }
+}
+
+// Badges
+.badge {
+    border-radius: 999px;
+    padding: 0.35em 0.75em;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.badge-primary, .bg-primary { background-color: $ecl-primary !important; color: #fff; }
+.badge-secondary, .bg-secondary { background-color: $ecl-secondary !important; color: #fff; }
+.badge-success, .bg-success { background-color: $ecl-green !important; color: #fff; }
+.badge-warning, .bg-warning { background-color: $ecl-orange !important; color: #fff; }
+
+// Alerts
+.alert {
+    border-radius: $border-radius;
+    border: none;
+    border-left: 4px solid currentColor;
+
+    &.alert-success { background: rgba($ecl-green, 0.08); color: darken($ecl-green, 10%); }
+    &.alert-info    { background: rgba($ecl-primary, 0.06); color: $ecl-primary; }
+    &.alert-warning { background: rgba($ecl-orange, 0.10); color: darken($ecl-orange, 10%); }
+    &.alert-danger  { background: rgba($ecl-secondary, 0.08); color: darken($ecl-secondary, 5%); }
+}
