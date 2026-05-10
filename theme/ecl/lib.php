@@ -1275,7 +1275,317 @@ function theme_ecl_get_extra_scss($theme) {
     }
     ';
 
-    // ── ACCESSIBILITY & USER-FRIENDLY ──────────────────────────
+    // ==========================================================
+    // VUE TUILES — Notion gallery + format_tiles inspired
+    // Activée par classe body.ecl-view-tiles (toggle JS)
+    // ==========================================================
+
+    $scss .= '
+    /* Toggle bar */
+    .ecl-view-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        background: #fff;
+        border-radius: 999px;
+        padding: 0.3rem;
+        box-shadow: 0 2px 10px rgba(0,35,98,0.08);
+        margin: 0 0 1.5rem;
+    }
+    .ecl-view-toggle button {
+        appearance: none;
+        background: transparent;
+        border: none;
+        padding: 0.5rem 1.1rem;
+        border-radius: 999px;
+        font-family: "Inter", sans-serif;
+        font-weight: 600;
+        font-size: 0.88rem;
+        color: #4a5568;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+    .ecl-view-toggle button i { font-size: 0.85rem; }
+    .ecl-view-toggle button:hover { color: #002362; }
+    .ecl-view-toggle button.active {
+        background: linear-gradient(135deg, #002362, #003a99);
+        color: #fff;
+        box-shadow: 0 3px 10px rgba(0,35,98,0.25);
+    }
+
+    /* ============ TILES VIEW ============ */
+    body.ecl-view-tiles .course-content > ul,
+    body.ecl-view-tiles .course-content ul.topics,
+    body.ecl-view-tiles .course-content ul.weeks {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 1.25rem;
+        list-style: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Each section becomes a TILE */
+    body.ecl-view-tiles li.section.main,
+    body.ecl-view-tiles .course-content > ul > li.section {
+        margin: 0 !important;
+        padding: 0 !important;
+        border-radius: 18px !important;
+        overflow: hidden;
+        height: 220px;
+        position: relative;
+        color: #fff;
+        cursor: pointer;
+        background: linear-gradient(135deg, #002362, #003a99);
+        box-shadow: 0 6px 22px rgba(0,35,98,0.18);
+        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+        isolation: isolate;
+    }
+    body.ecl-view-tiles li.section.main::before,
+    body.ecl-view-tiles .course-content > ul > li.section::before {
+        display: none !important;  /* on retire la bordure top gradient */
+    }
+    body.ecl-view-tiles li.section.main::after,
+    body.ecl-view-tiles .course-content > ul > li.section::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.12) 0%, transparent 50%);
+        z-index: 0;
+    }
+    body.ecl-view-tiles li.section.main:hover,
+    body.ecl-view-tiles .course-content > ul > li.section:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0,35,98,0.30);
+    }
+
+    /* Section name on tile */
+    body.ecl-view-tiles li.section .sectionname,
+    body.ecl-view-tiles .course-content .section-header {
+        position: absolute !important;
+        bottom: 1.1rem !important;
+        left: 1.5rem !important;
+        right: 1.5rem !important;
+        padding: 0 !important;
+        color: #fff !important;
+        font-family: "Playfair Display", serif !important;
+        font-weight: 700 !important;
+        font-size: 1.35rem !important;
+        line-height: 1.2 !important;
+        z-index: 3;
+        text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        flex-direction: column;
+        align-items: flex-start;
+        display: flex !important;
+        gap: 0.5rem;
+    }
+    body.ecl-view-tiles li.section .sectionname .ecl-section-num {
+        position: absolute !important;
+        top: -160px !important;
+        left: 0 !important;
+        font-family: "Playfair Display", serif !important;
+        font-size: 5.5rem !important;
+        font-weight: 800 !important;
+        background: transparent !important;
+        color: rgba(255,255,255,0.22) !important;
+        width: auto !important;
+        height: auto !important;
+        line-height: 1 !important;
+        box-shadow: none !important;
+        letter-spacing: -0.02em !important;
+        z-index: 1;
+    }
+
+    /* Activity count badge (injected) */
+    body.ecl-view-tiles .ecl-tile-stats {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: rgba(255,255,255,0.18);
+        backdrop-filter: blur(8px);
+        border-radius: 999px;
+        padding: 0.3rem 0.75rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #fff;
+        z-index: 3;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+    }
+    /* Mini-dots progress (injected) */
+    body.ecl-view-tiles .ecl-tile-dots {
+        position: absolute;
+        bottom: 4.5rem;
+        left: 1.5rem;
+        right: 1.5rem;
+        display: flex;
+        gap: 4px;
+        z-index: 3;
+    }
+    body.ecl-view-tiles .ecl-tile-dot {
+        flex: 1;
+        height: 4px;
+        background: rgba(255,255,255,0.25);
+        border-radius: 2px;
+        transition: background 0.2s ease;
+    }
+    body.ecl-view-tiles .ecl-tile-dot.done {
+        background: #fff;
+        box-shadow: 0 0 8px rgba(255,255,255,0.6);
+    }
+
+    /* Watermark emoji (injected via data-emoji) */
+    body.ecl-view-tiles li.section .ecl-tile-emoji {
+        position: absolute;
+        right: -10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 9rem;
+        opacity: 0.10;
+        z-index: 1;
+        pointer-events: none;
+        line-height: 1;
+    }
+
+    /* === TILE COLOR CYCLE (via data-tilecolor injected by JS) === */
+    body.ecl-view-tiles li.section[data-tilecolor="0"] { background: linear-gradient(135deg, #002362 0%, #003a99 100%); }
+    body.ecl-view-tiles li.section[data-tilecolor="1"] { background: linear-gradient(135deg, #cc0000 0%, #ff4444 100%); box-shadow: 0 6px 22px rgba(204,0,0,0.20); }
+    body.ecl-view-tiles li.section[data-tilecolor="2"] { background: linear-gradient(135deg, #F77F00 0%, #ffa940 100%); box-shadow: 0 6px 22px rgba(247,127,0,0.22); }
+    body.ecl-view-tiles li.section[data-tilecolor="3"] { background: linear-gradient(135deg, #009E60 0%, #00c878 100%); box-shadow: 0 6px 22px rgba(0,158,96,0.22); }
+    body.ecl-view-tiles li.section[data-tilecolor="4"] { background: linear-gradient(135deg, #6b46c1 0%, #9f7aea 100%); box-shadow: 0 6px 22px rgba(107,70,193,0.22); }
+    body.ecl-view-tiles li.section[data-tilecolor="5"] { background: linear-gradient(135deg, #db2777 0%, #ec4899 100%); box-shadow: 0 6px 22px rgba(219,39,119,0.22); }
+    body.ecl-view-tiles li.section[data-tilecolor="6"] { background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%); box-shadow: 0 6px 22px rgba(8,145,178,0.22); }
+    body.ecl-view-tiles li.section[data-tilecolor="7"] { background: linear-gradient(135deg, #65a30d 0%, #84cc16 100%); box-shadow: 0 6px 22px rgba(101,163,13,0.22); }
+    body.ecl-view-tiles li.section[data-tilecolor="8"] { background: linear-gradient(135deg, #ca8a04 0%, #facc15 100%); box-shadow: 0 6px 22px rgba(202,138,4,0.22); }
+    body.ecl-view-tiles li.section[data-tilecolor="9"] { background: linear-gradient(135deg, #be185d 0%, #f472b6 100%); box-shadow: 0 6px 22px rgba(190,24,93,0.22); }
+    body.ecl-view-tiles li.section[data-tilecolor="10"] { background: linear-gradient(135deg, #1e40af 0%, #60a5fa 100%); }
+    body.ecl-view-tiles li.section[data-tilecolor="11"] { background: linear-gradient(135deg, #581c87 0%, #c084fc 100%); }
+
+    /* Hide activities INSIDE tile (collapsed state) */
+    body.ecl-view-tiles li.section .content > .section,
+    body.ecl-view-tiles li.section .content > ul.section,
+    body.ecl-view-tiles li.section .summary,
+    body.ecl-view-tiles li.section .content > .activity-add,
+    body.ecl-view-tiles li.section .section-modchooser-link {
+        display: none !important;
+    }
+
+    /* ============ EXPANDED TILE STATE ============ */
+    body.ecl-view-tiles li.section.ecl-tile-open {
+        grid-column: 1 / -1 !important;
+        height: auto !important;
+        min-height: 360px;
+        background: #fff !important;
+        color: #002362;
+        cursor: default;
+        transform: none !important;
+        animation: ecl-tile-expand 0.4s ease;
+    }
+    @keyframes ecl-tile-expand {
+        from { opacity: 0.5; transform: scale(0.97); }
+        to { opacity: 1; transform: scale(1); }
+    }
+    body.ecl-view-tiles li.section.ecl-tile-open::after { display: none; }
+
+    /* Banner top of expanded tile (gradient header preserved) */
+    body.ecl-view-tiles li.section.ecl-tile-open .ecl-tile-banner {
+        display: block;
+        position: relative;
+        height: 140px;
+        background: inherit;
+        border-radius: 18px 18px 0 0;
+        overflow: hidden;
+        margin: 0;
+    }
+    body.ecl-view-tiles li.section.ecl-tile-open .sectionname {
+        position: relative !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
+        padding: 2rem 2rem 1rem !important;
+        color: #002362 !important;
+        font-size: 1.6rem !important;
+        text-shadow: none !important;
+        z-index: 2;
+    }
+    body.ecl-view-tiles li.section.ecl-tile-open .sectionname .ecl-section-num {
+        position: relative !important;
+        top: auto !important;
+        font-size: 1.4rem !important;
+        background: linear-gradient(135deg, #002362, #003a99) !important;
+        color: #fff !important;
+        width: 54px !important;
+        height: 54px !important;
+        border-radius: 14px !important;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        opacity: 1 !important;
+        box-shadow: 0 6px 18px rgba(0,35,98,0.25) !important;
+        margin-right: 1rem;
+    }
+    body.ecl-view-tiles li.section.ecl-tile-open .ecl-tile-emoji,
+    body.ecl-view-tiles li.section.ecl-tile-open .ecl-tile-stats,
+    body.ecl-view-tiles li.section.ecl-tile-open .ecl-tile-dots {
+        display: none !important;
+    }
+    body.ecl-view-tiles li.section.ecl-tile-open .summary,
+    body.ecl-view-tiles li.section.ecl-tile-open .content > .section,
+    body.ecl-view-tiles li.section.ecl-tile-open .content > ul.section,
+    body.ecl-view-tiles li.section.ecl-tile-open .activity-add,
+    body.ecl-view-tiles li.section.ecl-tile-open .section-modchooser-link {
+        display: block !important;
+    }
+    body.ecl-view-tiles li.section.ecl-tile-open .content > ul.section,
+    body.ecl-view-tiles li.section.ecl-tile-open .content > .section {
+        display: flex !important;
+        flex-direction: column;
+    }
+
+    /* Back to tiles button (injected in expanded state) */
+    body.ecl-view-tiles .ecl-tile-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 1.5rem 2rem 0;
+        background: rgba(0,35,98,0.06);
+        color: #002362;
+        border: none;
+        padding: 0.6rem 1.2rem;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    body.ecl-view-tiles .ecl-tile-back:hover {
+        background: linear-gradient(135deg, #002362, #003a99);
+        color: #fff;
+        transform: translateX(-2px);
+    }
+
+    /* Dim other tiles while one is open */
+    body.ecl-view-tiles.has-open-tile li.section:not(.ecl-tile-open) {
+        opacity: 0.55;
+        pointer-events: none;
+        transform: scale(0.96);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+        body.ecl-view-tiles .course-content > ul {
+            grid-template-columns: 1fr !important;
+        }
+        body.ecl-view-tiles li.section.main {
+            height: 180px;
+        }
+    }
+    ';
+
     $scss .= '
     a:focus-visible,
     button:focus-visible,
