@@ -46,11 +46,11 @@ async def root():
 @api_router.get("/download/ecl-theme")
 async def download_ecl_theme():
     """Serve the ECL Moodle theme ZIP for direct download."""
-    zip_path = "/app/theme/ecl_v1.1.0.zip"
+    zip_path = "/app/theme/ecl_v1.2.0.zip"
     return FileResponse(
         path=zip_path,
         media_type="application/zip",
-        filename="ecl_v1.1.0.zip",
+        filename="ecl_v1.2.0.zip",
     )
 
 @api_router.post("/status", response_model=StatusCheck)

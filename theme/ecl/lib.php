@@ -726,6 +726,600 @@ function theme_ecl_get_extra_scss($theme) {
     }
     ';
 
+    // ==========================================================
+    // COURSE SESSION MENU — PREMIUM (Coursera / Klass inspired)
+    // ==========================================================
+
+    // ── COURSE INDEX DRAWER (left sidebar in courses) ──────────
+    $scss .= '
+    .drawer-left,
+    [data-region="drawer"][data-drawer="left"],
+    #courseindex {
+        background: linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%) !important;
+        border-right: 1px solid rgba(0,35,98,0.08) !important;
+        box-shadow: inset -1px 0 0 rgba(0,35,98,0.04);
+    }
+    .drawerheader,
+    .courseindex-header,
+    [data-region="drawer"] .drawerheader {
+        background: linear-gradient(135deg, #002362 0%, #003a99 100%);
+        color: #fff;
+        padding: 1.25rem 1rem 1rem;
+        border-bottom: 3px solid #cc0000;
+        font-family: "Playfair Display", serif;
+        font-weight: 700;
+    }
+    .drawerheader * { color: #fff !important; }
+
+    .courseindex .courseindex-section,
+    .courseindex-section {
+        border: none !important;
+        border-radius: 10px;
+        margin: 0.45rem 0.6rem;
+        padding: 0;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(0,35,98,0.06);
+        transition: box-shadow 0.25s ease, transform 0.25s ease;
+        overflow: hidden;
+        border-left: 3px solid transparent !important;
+    }
+    .courseindex .courseindex-section:hover {
+        box-shadow: 0 6px 18px rgba(0,35,98,0.12);
+        border-left-color: #cc0000 !important;
+    }
+    .courseindex .courseindex-section.current,
+    .courseindex .courseindex-section[aria-current="page"] {
+        border-left-color: #cc0000 !important;
+        background: linear-gradient(135deg, rgba(0,35,98,0.04), rgba(204,0,0,0.04));
+    }
+
+    .courseindex .courseindex-sectiontitle,
+    .courseindex-section .courseindex-link,
+    .courseindex .courseindex-name {
+        font-family: "Playfair Display", serif !important;
+        font-weight: 700 !important;
+        font-size: 0.95rem !important;
+        color: #002362 !important;
+        padding: 0.75rem 0.9rem !important;
+        display: flex !important;
+        align-items: center;
+        gap: 0.6rem;
+        line-height: 1.3;
+        text-decoration: none !important;
+    }
+    .courseindex .courseindex-section.current .courseindex-sectiontitle,
+    .courseindex .courseindex-section[aria-current="page"] .courseindex-sectiontitle {
+        color: #cc0000 !important;
+    }
+
+    .ecl-chapter-num {
+        flex-shrink: 0;
+        width: 30px; height: 30px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #002362, #003a99);
+        color: #fff;
+        font-family: "Playfair Display", serif;
+        font-weight: 700;
+        font-size: 0.85rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 6px rgba(0,35,98,0.25);
+    }
+    .courseindex-section.current .ecl-chapter-num,
+    .courseindex-section[aria-current="page"] .ecl-chapter-num {
+        background: linear-gradient(135deg, #cc0000, #ff4444);
+    }
+
+    .courseindex .courseindex-item {
+        padding: 0 !important;
+        border: none !important;
+    }
+    .courseindex .courseindex-item .courseindex-link,
+    .courseindex .courseindex-item-content .courseindex-link {
+        font-family: "Inter", sans-serif !important;
+        font-weight: 500 !important;
+        font-size: 0.86rem !important;
+        color: #4a5568 !important;
+        padding: 0.55rem 0.9rem 0.55rem 3rem !important;
+        position: relative;
+        display: flex !important;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none !important;
+        transition: background 0.18s ease, color 0.18s ease, padding 0.18s ease;
+    }
+    .courseindex .courseindex-item .courseindex-link:hover {
+        background: rgba(0,35,98,0.05) !important;
+        color: #002362 !important;
+        padding-left: 3.25rem !important;
+    }
+    .courseindex .courseindex-item.current .courseindex-link,
+    .courseindex .courseindex-item[aria-current="page"] .courseindex-link {
+        background: rgba(204,0,0,0.06) !important;
+        color: #cc0000 !important;
+        font-weight: 600 !important;
+        border-left: 3px solid #cc0000;
+    }
+
+    .courseindex .completioninfo,
+    .courseindex .courseindex-link .completioninfo,
+    .courseindex-item .completioninfo {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px; height: 18px;
+        border-radius: 50%;
+        border: 2px solid #cbd5e0;
+        background: transparent;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.65rem;
+        color: transparent;
+        transition: all 0.25s ease;
+    }
+    .courseindex .courseindex-item.completed .completioninfo,
+    .courseindex-item[data-complete="1"] .completioninfo {
+        background: linear-gradient(135deg, #009E60, #00c878);
+        border-color: #009E60;
+        color: #fff;
+        box-shadow: 0 0 0 4px rgba(0,158,96,0.18);
+        animation: ecl-pop 0.4s ease;
+    }
+    @keyframes ecl-pop {
+        0% { transform: translateY(-50%) scale(0.5); }
+        60% { transform: translateY(-50%) scale(1.15); }
+        100% { transform: translateY(-50%) scale(1); }
+    }
+    ';
+
+    // ── COURSE PAGE — SECTIONS as PREMIUM CARDS ────────────────
+    $scss .= '
+    body.path-course-view #region-main,
+    body.format-topics #region-main,
+    body.format-weeks #region-main,
+    body.format-tiles #region-main {
+        background: transparent !important;
+    }
+
+    li.section.main,
+    .course-content ul.topics > li,
+    .course-content ul.weeks > li,
+    .course-content > ul > li.section {
+        background: #fff;
+        border: none !important;
+        border-radius: 16px !important;
+        box-shadow: 0 2px 16px rgba(0,35,98,0.07);
+        margin-bottom: 1.5rem !important;
+        padding: 0 !important;
+        overflow: hidden;
+        position: relative;
+        transition: box-shadow 0.3s ease;
+    }
+    li.section.main:hover,
+    .course-content > ul > li.section:hover {
+        box-shadow: 0 8px 28px rgba(0,35,98,0.12);
+    }
+
+    li.section.main::before,
+    .course-content > ul > li.section::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #002362 0%, #cc0000 100%);
+    }
+
+    li.section .sectionname,
+    li.section > .content > .sectionname,
+    .course-content .section-header,
+    .section-title-action {
+        padding: 1.75rem 2rem 1rem !important;
+        font-family: "Playfair Display", serif !important;
+        font-weight: 700 !important;
+        font-size: 1.5rem !important;
+        color: #002362 !important;
+        margin: 0 !important;
+        border: none !important;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        position: relative;
+    }
+
+    li.section .ecl-section-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 54px; height: 54px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #002362, #003a99);
+        color: #fff;
+        font-family: "Playfair Display", serif;
+        font-weight: 800;
+        font-size: 1.4rem;
+        box-shadow: 0 6px 18px rgba(0,35,98,0.25);
+        letter-spacing: 0.02em;
+    }
+    li.section.current .ecl-section-num {
+        background: linear-gradient(135deg, #cc0000, #ff4444);
+        box-shadow: 0 6px 18px rgba(204,0,0,0.3);
+    }
+
+    li.section > .content > .summary,
+    .course-content .summary {
+        padding: 0 2rem 1rem !important;
+        color: #4a5568;
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+    li.section > .content > .section,
+    li.section > .content > ul.section,
+    .course-content ul.section.img-text {
+        padding: 0.5rem 1rem 1.5rem !important;
+        margin: 0 !important;
+        background: transparent !important;
+        list-style: none !important;
+    }
+    ';
+
+    // ── ACTIVITY ITEMS — COLOR-CODED BY TYPE ───────────────────
+    $scss .= '
+    .activity-item,
+    li.section li.activity,
+    .course-content li.activity {
+        background: #fff !important;
+        border: 1px solid rgba(0,35,98,0.07) !important;
+        border-radius: 12px !important;
+        padding: 0.85rem 1.25rem !important;
+        margin: 0.5rem 0.75rem !important;
+        display: flex !important;
+        align-items: center;
+        gap: 1rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        position: relative;
+        list-style: none !important;
+    }
+    .activity-item:hover,
+    li.section li.activity:hover {
+        transform: translateX(4px);
+        box-shadow: 0 6px 20px rgba(0,35,98,0.10);
+        border-color: rgba(0,35,98,0.15) !important;
+    }
+
+    .activity-item .activityiconcontainer,
+    li.activity .activityiconcontainer,
+    .activity .activityicon,
+    li.activity .iconlarge,
+    li.activity img.icon,
+    .activity-item img.activityicon {
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 12px !important;
+        padding: 9px !important;
+        background: linear-gradient(135deg, #002362, #003a99);
+        box-shadow: 0 4px 12px rgba(0,35,98,0.2);
+        flex-shrink: 0;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+    .activity-item .activityiconcontainer img,
+    li.activity .activityiconcontainer img,
+    li.activity img.icon {
+        filter: brightness(0) invert(1) !important;
+        max-width: 26px !important;
+        max-height: 26px !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+    }
+
+    /* Color per activity type */
+    .activity-item.modtype_assign .activityiconcontainer,
+    li.activity.modtype_assign .activityiconcontainer,
+    li.modtype_assign img.icon {
+        background: linear-gradient(135deg, #cc0000, #ff4444) !important;
+        box-shadow: 0 4px 12px rgba(204,0,0,0.25) !important;
+    }
+    .activity-item.modtype_quiz .activityiconcontainer,
+    li.activity.modtype_quiz .activityiconcontainer,
+    li.modtype_quiz img.icon {
+        background: linear-gradient(135deg, #F77F00, #ffa940) !important;
+        box-shadow: 0 4px 12px rgba(247,127,0,0.25) !important;
+    }
+    .activity-item.modtype_forum .activityiconcontainer,
+    li.activity.modtype_forum .activityiconcontainer,
+    li.modtype_forum img.icon {
+        background: linear-gradient(135deg, #003a99, #4361ee) !important;
+        box-shadow: 0 4px 12px rgba(0,58,153,0.25) !important;
+    }
+    .activity-item.modtype_resource .activityiconcontainer,
+    li.activity.modtype_resource .activityiconcontainer,
+    .activity-item.modtype_folder .activityiconcontainer,
+    li.modtype_resource img.icon,
+    li.modtype_folder img.icon {
+        background: linear-gradient(135deg, #6b46c1, #9f7aea) !important;
+        box-shadow: 0 4px 12px rgba(107,70,193,0.25) !important;
+    }
+    .activity-item.modtype_url .activityiconcontainer,
+    li.activity.modtype_url .activityiconcontainer,
+    li.modtype_url img.icon {
+        background: linear-gradient(135deg, #009E60, #00c878) !important;
+        box-shadow: 0 4px 12px rgba(0,158,96,0.25) !important;
+    }
+    .activity-item.modtype_page .activityiconcontainer,
+    li.activity.modtype_page .activityiconcontainer,
+    li.modtype_page img.icon {
+        background: linear-gradient(135deg, #0891b2, #06b6d4) !important;
+    }
+    .activity-item.modtype_lesson .activityiconcontainer,
+    li.activity.modtype_lesson .activityiconcontainer,
+    li.modtype_lesson img.icon {
+        background: linear-gradient(135deg, #db2777, #ec4899) !important;
+    }
+    .activity-item.modtype_workshop .activityiconcontainer,
+    li.activity.modtype_workshop .activityiconcontainer {
+        background: linear-gradient(135deg, #65a30d, #84cc16) !important;
+    }
+    .activity-item.modtype_h5pactivity .activityiconcontainer,
+    li.activity.modtype_h5pactivity .activityiconcontainer {
+        background: linear-gradient(135deg, #be185d, #f472b6) !important;
+    }
+    .activity-item.modtype_choice .activityiconcontainer,
+    .activity-item.modtype_feedback .activityiconcontainer,
+    .activity-item.modtype_survey .activityiconcontainer {
+        background: linear-gradient(135deg, #ca8a04, #facc15) !important;
+    }
+
+    .activity-item .activityname,
+    .activity-item .stretched-link,
+    li.activity .instancename,
+    li.activity a.aalink {
+        font-family: "Inter", sans-serif !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+        color: #002362 !important;
+        text-decoration: none !important;
+        flex: 1;
+        line-height: 1.4;
+    }
+    .activity-item:hover .activityname,
+    li.activity:hover .instancename {
+        color: #cc0000 !important;
+    }
+
+    .activity-item .activity-altcontent,
+    .activity-item .description,
+    li.activity .contentwithoutlink,
+    li.activity .description {
+        font-size: 0.82rem !important;
+        color: #6c757d !important;
+        margin-top: 0.2rem;
+        line-height: 1.45;
+    }
+
+    .activity-item .activity-completion,
+    .activity-item .completion-info,
+    li.activity .autocompletion,
+    li.activity .completioninfo {
+        margin-left: auto !important;
+        display: inline-flex !important;
+        align-items: center;
+        gap: 0.35rem;
+    }
+    .activity-item .completion-info .completion-icon,
+    .activity-item .activity-completion button,
+    li.activity .autocompletion img {
+        width: 28px !important;
+        height: 28px !important;
+        border-radius: 50% !important;
+        border: 2px solid #cbd5e0 !important;
+        background: #fff !important;
+        transition: all 0.25s ease;
+    }
+    .activity-item.completed,
+    li.activity.completed {
+        background: linear-gradient(90deg, rgba(0,158,96,0.04), transparent 60%) !important;
+        border-color: rgba(0,158,96,0.25) !important;
+    }
+    .activity-item.completed .completion-icon,
+    li.activity.completed .autocompletion img {
+        background: linear-gradient(135deg, #009E60, #00c878) !important;
+        border-color: #009E60 !important;
+        box-shadow: 0 0 0 4px rgba(0,158,96,0.18) !important;
+    }
+
+    .activity-add,
+    .section-modchooser-link,
+    .add-sections {
+        background: rgba(0,35,98,0.04) !important;
+        border: 2px dashed rgba(0,35,98,0.25) !important;
+        border-radius: 12px !important;
+        padding: 0.85rem 1.25rem !important;
+        margin: 0.75rem !important;
+        text-align: center;
+        color: #002362 !important;
+        font-weight: 600;
+        transition: all 0.2s ease;
+        text-decoration: none !important;
+    }
+    .activity-add:hover,
+    .section-modchooser-link:hover {
+        background: rgba(204,0,0,0.05) !important;
+        border-color: #cc0000 !important;
+        color: #cc0000 !important;
+        transform: translateY(-1px);
+    }
+    ';
+
+    // ── COURSE STICKY HEADER + PROGRESS ────────────────────────
+    $scss .= '
+    body.path-course-view #page-header,
+    body.path-course #page-header {
+        background: linear-gradient(135deg, #001a4d 0%, #002362 70%, #003a99 100%);
+        color: #fff;
+        padding: 2.5rem 2rem 2rem;
+        margin-bottom: 2rem;
+        border-radius: 0 0 22px 22px;
+        position: relative;
+        overflow: hidden;
+    }
+    body.path-course-view #page-header::after {
+        content: "";
+        position: absolute;
+        bottom: -60px; right: -60px;
+        width: 280px; height: 280px;
+        background: rgba(204,0,0,0.10);
+        border-radius: 50%;
+    }
+    body.path-course-view #page-header h1,
+    body.path-course-view #page-header .h2,
+    body.path-course-view .page-header-headings h1 {
+        color: #fff !important;
+        font-family: "Playfair Display", serif !important;
+        font-size: 2.25rem;
+        font-weight: 800;
+        text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+        margin-bottom: 0.5rem;
+        position: relative;
+        z-index: 2;
+    }
+    body.path-course-view #page-header .breadcrumb,
+    body.path-course-view #page-header .breadcrumb-item,
+    body.path-course-view #page-header .breadcrumb-item a {
+        background: transparent !important;
+        color: rgba(255,255,255,0.8) !important;
+        position: relative;
+        z-index: 2;
+    }
+
+    .ecl-course-progress {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 1.25rem;
+        padding: 0.85rem 1.25rem;
+        background: rgba(255,255,255,0.08);
+        border-radius: 999px;
+        max-width: 480px;
+        backdrop-filter: blur(8px);
+        position: relative;
+        z-index: 2;
+    }
+    .ecl-course-progress-label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: rgba(255,255,255,0.9);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        white-space: nowrap;
+    }
+    .ecl-course-progress-bar {
+        flex: 1;
+        height: 8px;
+        background: rgba(255,255,255,0.15);
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    .ecl-course-progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #cc0000, #ff4444);
+        border-radius: 4px;
+        transition: width 1.2s cubic-bezier(0.33, 1, 0.68, 1);
+        box-shadow: 0 0 12px rgba(204,0,0,0.5);
+    }
+    .ecl-course-progress-pct {
+        font-family: "Playfair Display", serif;
+        font-weight: 800;
+        color: #ffaaaa;
+        font-size: 1.15rem;
+        min-width: 50px;
+        text-align: right;
+    }
+
+    .secondary-navigation {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(0,35,98,0.06);
+        margin-bottom: 1.5rem;
+        padding: 0.25rem;
+    }
+    .secondary-navigation .nav-tabs {
+        border: none;
+        padding: 0;
+    }
+    .secondary-navigation .nav-tabs .nav-link {
+        border: none !important;
+        border-radius: 8px !important;
+        padding: 0.65rem 1.2rem !important;
+        font-weight: 600;
+        color: #4a5568 !important;
+        background: transparent !important;
+        transition: all 0.2s ease;
+    }
+    .secondary-navigation .nav-tabs .nav-link:hover {
+        background: rgba(0,35,98,0.06) !important;
+        color: #002362 !important;
+    }
+    .secondary-navigation .nav-tabs .nav-link.active {
+        background: linear-gradient(135deg, #002362, #003a99) !important;
+        color: #fff !important;
+        box-shadow: 0 4px 12px rgba(0,35,98,0.25) !important;
+        border: none !important;
+    }
+    ';
+
+    // ── ACCESSIBILITY & USER-FRIENDLY ──────────────────────────
+    $scss .= '
+    a:focus-visible,
+    button:focus-visible,
+    .btn:focus-visible,
+    .nav-link:focus-visible,
+    .activity-item:focus-visible,
+    .formation-card:focus-visible {
+        outline: 3px solid #cc0000 !important;
+        outline-offset: 3px !important;
+        border-radius: 6px;
+    }
+
+    @media (max-width: 768px) {
+        .activity-item,
+        li.section li.activity {
+            padding: 1rem !important;
+            gap: 0.85rem;
+        }
+        .activity-item .activityiconcontainer {
+            width: 40px !important; height: 40px !important;
+        }
+        li.section .sectionname {
+            padding: 1.25rem 1.25rem 0.75rem !important;
+            font-size: 1.2rem !important;
+        }
+        li.section .ecl-section-num {
+            width: 44px; height: 44px;
+            font-size: 1.15rem;
+        }
+    }
+
+    html { scroll-behavior: smooth; }
+
+    ::selection { background: #002362; color: #fff; }
+    ::-moz-selection { background: #002362; color: #fff; }
+
+    .tooltip-inner {
+        background: #002362 !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.85rem !important;
+        font-weight: 500;
+    }
+    ';
+
     return $scss;
 }
 
